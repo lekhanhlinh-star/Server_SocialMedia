@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  backend:
+    image: backend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - PORT=3000
+      - DATABASE=mongodb://database:27017/Social_media
+      - DATABASE_PASSWORD=toan29102002
+      - NODE_ENV=development
+
+      - JWT_SECRET=nguyen-thanh-toan-cang-long-tra-vinh-my-web-node-js
+      - JWT_EXPIRES_IN=90d
+      - JWT_COOKIE_EXPIRES_IN=90d
+
+      - EMAIL_USERNAME=c56efa3b971f88
+      - EMAIL_PASSWORD=ae9ebfec15ac23
+      - EMAIL_HOST=sandbox.smtp.mailtrap.io
+      - EMAIL_PORT=25
+
+    ports:
+      - 3000:3000
+  database:
+    image: mongo:latest
+    container_name: mongo-db
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_DATABASE=Social_media
